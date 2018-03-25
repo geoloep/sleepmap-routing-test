@@ -15,10 +15,8 @@ import { ProjectWebMercatorService } from 'krite/lib/services/projectWebMercator
 import { PdokLocatieserverService } from 'krite/lib/services/pdokLocatieserver';
 
 const mapOptions: L.MapOptions = {
-    // minZoom: 3,
-    // maxZoom: 16,
-    center: [52.156, 5.389],
-    zoom: 3,
+    center: [52.09, 5.11],
+    zoom: 12,
     preferCanvas: true,
 };
 
