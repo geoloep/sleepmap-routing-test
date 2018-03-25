@@ -26,7 +26,6 @@ pool.addServices({
 });
 
 const map = pool.addService<MapService>('MapService', new MapService(undefined, mapOptions, {
-    checkZoom: true,
     defaultMarker: new L.DivIcon({
         className: 'krite-map-marker',
         html: '<span class="mdi mdi-map-marker mdi-48px has-text-link krite-map-marker"></span>',
@@ -35,8 +34,14 @@ const map = pool.addService<MapService>('MapService', new MapService(undefined, 
 }));
 
 import { OsmLayer } from 'krite/lib/sources/osm/source';
+import { SleepmapLayer } from './sources/sleepmap/layer';
 
 map.addLayer(new OsmLayer());
+map.addLayer(new SleepmapLayer(new L.DivIcon({
+    className: 'krite-map-marker',
+    html: '<span class="mdi mdi-map-marker mdi-48px has-text-link krite-map-marker"></span>',
+    iconAnchor: L.point(24, 54),
+})));
 
 import App from './components/app/app.vue';
 
