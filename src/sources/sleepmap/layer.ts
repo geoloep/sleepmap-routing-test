@@ -29,7 +29,7 @@ export class SleepmapLayer implements ILayer {
         },
     });
 
-    private backend = 'http://localhost:8000/api/route/';
+    private backend = 'https://service.geoloep.nl/routing/api/route/';
 
     constructor(readonly icon: L.Icon | L.DivIcon, readonly errorIcon: L.Icon | L.DivIcon) {
         this.leaflet.addLayer(this.path);
