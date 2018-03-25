@@ -22,7 +22,7 @@
             </nav>
             <div class="container is-fluid is-marginless grow">
                 <div class="columns is-gapless is-multiline full-height">
-                    <div class="column is-two-fifths-tablet is-one-third-desktop is-one-quarter-widescreen">
+                    <!-- <div class="column is-two-fifths-tablet is-one-third-desktop is-one-quarter-widescreen">
                         <div class="zijbalk">
                             <pdok-search></pdok-search>
                             <div class="box">
@@ -32,7 +32,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="column">
                         <leaflet></leaflet>
                     </div>
