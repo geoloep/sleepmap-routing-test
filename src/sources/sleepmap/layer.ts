@@ -16,6 +16,8 @@ export class SleepmapLayer implements ILayer {
 
     leaflet = L.layerGroup([]);
 
+    private error = false;
+
     private startMarker: L.Marker;
     private endMarker: L.Marker;
 
@@ -29,7 +31,7 @@ export class SleepmapLayer implements ILayer {
 
     private backend = 'http://localhost:8000/api/route/';
 
-    constructor(readonly icon: L.Icon | L.DivIcon) {
+    constructor(readonly icon: L.Icon | L.DivIcon, readonly errorIcon: L.Icon | L.DivIcon) {
         this.leaflet.addLayer(this.path);
         this.placeMarkers();
     }
@@ -37,7 +39,7 @@ export class SleepmapLayer implements ILayer {
     /**
      * Place initial markers
      */
-    placeMarkers() {
+    private placeMarkers() {
         const start = this.startMarker = L.marker([52.084, 5.082], {
             draggable: true,
             icon: this.icon,
@@ -57,15 +59,22 @@ export class SleepmapLayer implements ILayer {
         this.renewPath();
     }
 
-    renewPath = async () => {
-        const route = await this.routeLookup();
+    private renewPath = async () => {
+        try {
+            const route = await this.routeLookup();
 
-        this.path.clearLayers();
+            this.path.clearLayers();
 
-        this.path.addData(route.route.geojson);
+            this.path.addData(route.route.geojson);
+
+            this.setOkIcon();
+        } catch (e) {
+            this.path.clearLayers();
+            this.setErrorIcon();
+        }
     }
 
-    async routeLookup() {
+    private async routeLookup() {
         const response = await fetch(this.backend, {
             method: 'POST',
             headers: {
@@ -83,4 +92,20 @@ export class SleepmapLayer implements ILayer {
 
         return await response.json();
     }
+
+    private setErrorIcon() {
+        this.error = true;
+
+        this.startMarker.setIcon(this.errorIcon as L.Icon);
+        this.endMarker.setIcon(this.errorIcon as L.Icon);
+    }
+
+    private setOkIcon() {
+        if (this.error) {
+            this.error = false;
+            this.startMarker.setIcon(this.icon as L.Icon);
+            this.endMarker.setIcon(this.icon as L.Icon);
+        }
+    }
+
 }
