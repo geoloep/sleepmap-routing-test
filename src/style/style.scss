@@ -1,0 +1,43 @@
+@import "_variables.scss";
+@import "~bulma/bulma.sass";
+@import "~buefy/src/scss/buefy";
+@import "~bulmaswatch/yeti/_overrides.scss";
+
+// Hack voor Internet Explorer
+.modal-card {
+    overflow: auto;
+}
+
+.modal .animation-content {
+    width: initial;
+    max-width: 100vw !important;
+}
+
+
+.modal-card-foot {
+    background-color: white;
+    justify-content: flex-end;
+}
+
+.accordion .message {
+    margin-bottom: 5px;
+}
+
+.accordion .message-header {
+    cursor: pointer;
+}
+.accordion .message-header:hover {
+    background-color: $grey-light;
+}
+
+.accordion .message-body {
+    background-color: #fefefe;
+}
+
+.navbar {
+    z-index: 3000;
+}
+
+.krite-map-marker {
+    text-shadow: 2px 2px 4px lightgrey;
+}
