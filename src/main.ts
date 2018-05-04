@@ -6,6 +6,8 @@ import ServicePlugin from 'krite/lib/plugins/servicePlugin';
 Vue.use(Buefy);
 Vue.use(ServicePlugin);
 
+import * as L from 'leaflet';
+
 import './style/style.scss';
 import 'leaflet/dist/leaflet.css';
 
@@ -54,4 +56,8 @@ import App from './components/app/app.vue';
 const app = new Vue({
     el: '#app',
     render: (h: any) => h(App),
+});
+
+fetch('/dist/vs.json').then(async (response) => {
+    L.geoJSON(await response.json()).addTo(map.map);
 });

@@ -29,7 +29,9 @@ export class SleepmapLayer implements ILayer {
         },
     });
 
-    private backend = 'https://service.geoloep.nl/routing/api/route/';
+    // private backend = 'https://service.geoloep.nl/routing/api/route/';
+    // private backend = 'http://localhost:8000/api/route/';
+    private backend = 'http://api.onbegluurd.nl/api/route/';
 
     constructor(readonly icon: L.Icon | L.DivIcon, readonly errorIcon: L.Icon | L.DivIcon) {
         this.leaflet.addLayer(this.path);
@@ -83,6 +85,7 @@ export class SleepmapLayer implements ILayer {
             body: JSON.stringify({
                 start: (this.startMarker as any).toGeoJSON(),
                 end: (this.endMarker as any).toGeoJSON(),
+                privacy: true,
             }),
         });
 
